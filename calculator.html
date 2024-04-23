@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Responsive Calculator & Tasbe Counter</title>
+    <style>
+        .calculator,
+        .tasbe-counter {
+            width: 300px;
+            margin: 20px auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+        }
+
+        .calculator input[type="text"],
+        .tasbe-counter #count {
+            width: 100%;
+            margin-bottom: 10px;
+            padding: 10px;
+            font-size: 20px;
+            text-align: right;
+        }
+
+        .calculator .buttons,
+        .tasbe-counter .buttons {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            grid-gap: 5px;
+        }
+
+        .calculator button,
+        .tasbe-counter button {
+            padding: 10px;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            background-color: #ddd;
+        }
+
+        .calculator button:hover,
+        .tasbe-counter button:hover {
+            background-color: #ccc;
+        }
+    </style>
+</head>
+<body>
+    <div class="calculator">
+        <input type="text" id="calc-display" disabled>
+        <div class="buttons">
+            
+            <button onclick="appendToDisplay('1')">1</button>
+            <button onclick="appendToDisplay('2')">2</button>
+            
+            <button onclick="appendToDisplay('3')">3</button>
+            <button onclick="clearDisplay()">C</button>
+            <button onclick="appendToDisplay('4')">4</button>
+            <button onclick="appendToDisplay('5')">5</button>
+            <button onclick="appendToDisplay('6')">6</button>
+            <button onclick="appendToDisplay('+')">+</button>
+            <button onclick="appendToDisplay('7')">7</button>
+            <button onclick="appendToDisplay('8')">8</button>
+            <button onclick="appendToDisplay('9')">9</button>
+            <button onclick="appendToDisplay('-')">-</button>
+            <button onclick="appendToDisplay('0')">0</button>
+            <button onclick="appendToDisplay('%')">%</button>
+            <button onclick="appendToDisplay('/')">/</button>
+            <button onclick="calculate()">=</button>
+            <button onclick="appendToDisplay('00')">00</button>
+        </div>
+    </div>
+
+    <div class="tasbe-counter">
+        <h1><em>TASBE AFTER <hr> FERZ NIMAZ</em></h1>
+        <hr>
+        <h1>1:-   <em>SUBHANALLAH</em></h1>
+        <hr>
+        <h1>2:-   <em>ALLAH O AKBER</em></h1>
+        <hr>
+        <h1>3:-     <em>LAHILAHA IL LL <hr> LA <hr> HU  MUHAMMAD <hr>UR <hr>RASOOLULLA</em></h1>
+        <hr>
+        <div id="count">0</div>
+        <button onclick="increment()">+</button>
+        <button onclick="decrement()">-</button>
+        <button onclick="reset()">Reset</button>
+    </div>
+
+    <script>
+        let calcDisplay = document.getElementById('calc-display');
+        let tasbeCountDisplay = document.getElementById('count');
+        let calcExpression = '';
+        let tasbeCount = 0;
+
+        function appendToDisplay(value) {
+            calcDisplay.value += value;
+            calcExpression += value;
+        }
+
+        function clearDisplay() {
+            calcDisplay.value = '';
+            calcExpression = '';
+        }
+
+        function calculate() {
+            try {
+                calcDisplay.value = eval(calcExpression);
+            } catch (error) {
+                calcDisplay.value = 'Error';
+            }
+        }
+
+        function increment() {
+            tasbeCount++;
+            updateTasbeDisplay();
+        }
+
+        function decrement() {
+            if (tasbeCount > 0) {
+                tasbeCount--;
+                updateTasbeDisplay();
+            }
+        }
+
+        function reset() {
+            tasbeCount = 0;
+            updateTasbeDisplay();
+        }
+
+        function updateTasbeDisplay() {
+            tasbeCountDisplay.textContent = tasbeCount;
+        }
+    </script>
+</body>
+</html>
